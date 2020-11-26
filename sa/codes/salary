@@ -179,7 +179,62 @@ namespace final
 
         private void btnupdate_Click(object sender, EventArgs e)
         {
-            refreshdb();
+            try
+            {
+
+                sqlConn.ConnectionString = "server=" + server + ";" + "user id=" + username + ";" + "password=" + password + ";" + "database=" + database;
+
+                sqlCmd.Connection = sqlConn;
+
+                String ID = txtEmpID.Text;
+                String Firstname = txtFirstname.Text;
+                String Surname = txtSurname.Text;
+                String Address = txtaddress.Text;
+                String Gender = combogender.Text;
+                String Mobile = txtmobile.Text;
+                String Cityweighting = txtcityweighting.Text;
+                String Salary= txtbasicsalary.Text;
+                String Overtime= txtovertime.Text;
+                String Otherpayment = txtotherpayment.Text;
+                String Tax = txttax.Text;
+                String Pension = txtpension.Text;
+                String Studentloan = txtstudentloan.Text;
+                String NIPayment = txtNIPayment.Text;
+                String Paydate = dateTimePicker1.Text;
+                String Taxperiod = txttaxperiod.Text;
+                String Taxcode = txttaxcode.Text;
+                String NIPeriod = txtNIPeriod.Text;
+                String NICode = txtNICode.Text;
+                String Taxablepay = txttaxablepay.Text;
+                String Pensionablepay = txtpensionablepay.Text;
+                String Netpay = txtnetpay.Text;
+                String Grosspay = txtgrosspay.Text;
+                String Deduction = txtdeduction.Text;
+
+
+                sqlCmd.CommandText = "update from employeedb set ID = '" + ID + "',Firstname = '" + Firstname + "',Surname = '" + Surname + "'," +
+                    "Address = '" + Address + "',Gender = '" + Gender + "',Mobile = '" + Mobile + "',Cityweighting = '" + Cityweighting + "',Salary = '" + Salary +
+                    "',Overtime = '" + Overtime + "', Otherpayment = '" + Otherpayment + "',Tax = '" + Tax + "',Pension = '" + Pension + "', Studentloan = '" + Studentloan +
+                    "',NIPayment = '" + NIPayment + "',Paydate = '" + Paydate + "',Taxperiod = '" + Taxperiod + "',Taxcode = '" + Taxcode + "',NIPeriod = '" + NIPeriod +
+                    "',NICode = '" + NICode + "',Taxablepay = '" + Taxablepay + "',Pensionablepay = '" + Pensionablepay + "',Netpay = '" + Netpay +
+                    "',Grosspay = '" + Grosspay + "',Deduction = '" + Deduction + "' WHERE ID = " + ID + "";
+
+
+
+
+
+                sqlConn.Open();
+
+                sqlRd = sqlCmd.ExecuteReader();
+                MessageBox.Show("Record Updated", "Employee System", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                sqlConn.Close();
+                refreshdb();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message); 
+            }
+
         }
 
         private void btndelete_Click(object sender, EventArgs e)
