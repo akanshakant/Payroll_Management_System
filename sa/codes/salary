@@ -1,0 +1,286 @@
+
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using MySql.Data.MySqlClient;
+
+
+namespace final
+{
+    public partial class salary : Form
+    {
+        MySqlConnection sqlConn = new MySqlConnection();
+        MySqlCommand sqlCmd = new MySqlCommand();
+        MySqlDataAdapter sqlDta = new MySqlDataAdapter();
+        DataTable sqlDt = new DataTable();
+        MySqlDataReader sqlRd;
+
+        DataSet DS = new DataSet();
+
+        String server = "localhost";
+        String database = "employee";
+        String username = "root";
+        String password = "admin";
+
+        private void uploadData()
+        {
+
+            sqlConn.ConnectionString = "server=" + server + ";" + "user id=" + username + ";" + "password=" + password + ";" + "database=" + database;
+            sqlConn.Open();
+            sqlCmd.Connection = sqlConn;
+            sqlCmd.CommandText = "select * from employeedb";
+            sqlRd = sqlCmd.ExecuteReader();
+            sqlDt.Load(sqlRd);
+            sqlRd.Close();
+            sqlConn.Close();
+            dataGridView1.DataSource = sqlDt;
+
+        }
+
+        private void refreshdb()
+        {
+            try
+            {
+                sqlConn.ConnectionString = "server=" + server + ";" + "user id=" + username + ";" + "password=" + password + ";" + "database=" + database;
+                sqlCmd.Connection = sqlConn;
+
+                MySqlDataAdapter sqlDta = new MySqlDataAdapter("select * from employeedb", sqlConn);
+                DataTable sqlDt = new DataTable();
+
+                sqlDta.Fill(sqlDt);
+                dataGridView1.DataSource = sqlDt;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Employee System", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+        }
+
+        public salary()
+        {
+            InitializeComponent();
+            uploadData();
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox22_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtotherpayment_MouseClick(object sender, MouseEventArgs e)
+        {
+
+            txtotherpayment.Text = "";
+            txtotherpayment.Focus();
+        }
+
+        private void txtotherpayment_MouseEnter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnreset_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                txtEmpID.Text = "";
+                txtFirstname.Text = "";
+                txtSurname.Text = "";
+                txtaddress.Text = "";
+                txtmobile.Text = "";
+                txtcityweighting.Text = "";
+                txtbasicsalary.Text = "";
+                txtovertime.Text = "";
+                txtotherpayment.Text = "0.0";
+                txttax.Text = "";
+                txtpension.Text = "";
+                txtstudentloan.Text = "";
+                txtNIPayment.Text = "";
+                txttaxcode.Text = "";
+                txttaxperiod.Text = "0";
+                txtNIPeriod.Text = "";
+                txtNICode.Text = "";
+                txttaxablepay.Text = "";
+                txtpensionablepay.Text = "";
+                txtnetpay.Text = "";
+                txtgrosspay.Text = "";
+                txtdeduction.Text = "";
+                txtsearch.Text = "";
+                dateTimePicker1.ResetText();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Employee System", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            try
+            {
+                System.Drawing.Font fntsring = new System.Drawing.Font("Arial", 18, FontStyle.Regular);
+                e.Graphics.DrawString(richTextBox1.Text, fntsring, Brushes.Black, 120, 120);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Employee System", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void btnprint_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                printPreviewDialog1.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Employee System", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void btnexit_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DialogResult iExit;
+                iExit = MessageBox.Show("confirm if you want to exit", "Employee system", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (iExit == DialogResult.Yes)
+                {
+                    Application.Exit();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Employee System", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void salary_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnrefresh_Click(object sender, EventArgs e)
+        {
+            refreshdb();
+        }
+
+        private void btnupdate_Click(object sender, EventArgs e)
+        {
+            refreshdb();
+        }
+
+        private void btndelete_Click(object sender, EventArgs e)
+        {
+            refreshdb();
+        }
+
+        private void txtsearch_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            try
+            {
+                if (e.KeyChar == (Char)13)
+                {
+                    DataView dv = sqlDt.DefaultView;
+                    dv.RowFilter = string.Format("Firstname like '%{0}%'", txtsearch.Text);
+                    dataGridView1.DataSource = dv.ToTable();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Employee System", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void btnsearch_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DataView dv = sqlDt.DefaultView;
+                dv.RowFilter = string.Format("Firstname like'%{0}%'", txtsearch.Text);
+                dataGridView1.DataSource = dv.ToTable();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Employee System", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void btntotal_Click(object sender, EventArgs e)
+        {
+            try
+            { 
+
+            double Grosspay, Deduction, Netpay, Period;
+            double Intercity, Basicpay, Overtime, OtherPayment, Tax, Pension, StudentLoan, NIPayment;
+
+            Intercity = Double.Parse(txtcityweighting.Text);
+            Basicpay = Double.Parse(txtbasicsalary.Text);
+            Overtime = Double.Parse(txtovertime.Text);
+            OtherPayment = Double.Parse(txtotherpayment.Text);
+            Grosspay = Intercity + Basicpay + Overtime + OtherPayment;
+
+            txtgrosspay.Text = String.Format("{0:c2}", Grosspay);
+
+            Tax = (Grosspay * 9) / 100;
+            Pension = (Grosspay * 12) / 100;
+            StudentLoan = (Grosspay * 5) / 100;
+            NIPayment = (Grosspay * 3) / 100;
+
+            txttax.Text = String.Format("{0:c2}", Tax);
+            txtpension.Text = String.Format("{0:c2}", Pension);
+            txtstudentloan.Text = String.Format("{0:c2}", StudentLoan);
+            txtNIPayment.Text = String.Format("{0:c2}", NIPayment);
+
+            Deduction = Tax + Pension + StudentLoan + NIPayment;
+            txtdeduction.Text = String.Format("{0:c2}", Deduction);
+
+            Netpay = Grosspay - Deduction;
+            txtnetpay.Text = String.Format("{0:c2}", Netpay);
+            
+            Period = Double.Parse(txttaxperiod.Text);
+            txttaxablepay.Text = String.Format("{0:c2}", Period);
+            txtpensionablepay.Text = String.Format("{0:c2}", Period * Pension);
+                // ==============================================================================================================================
+                    
+                
+                     sqlConn.ConnectionString = "server=" + server + ";" + "user id=" + username + ";" + "password=" + password + ";" + "database=" + database;
+                     sqlConn.Open();
+                     sqlCmd.Connection = sqlConn;
+                     sqlCmd.CommandText = "insert into employeedb(ID,Firstname,Surname,Address,Gender,Mobile"+
+
+
+
+               // ==============================================================================================================================
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Employee System", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void txtotherpayment_MouseLeave(object sender, EventArgs e)
+        {
+            if (txtotherpayment.Text == "")
+            {
+                txtotherpayment.Text = "0.0";
+            }
+
+        }
+    }
+}
+
