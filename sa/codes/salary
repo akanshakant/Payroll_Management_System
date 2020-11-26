@@ -130,7 +130,7 @@ namespace final
             try
             {
                 System.Drawing.Font fntsring = new System.Drawing.Font("Arial", 18, FontStyle.Regular);
-                e.Graphics.DrawString(richTextBox1.Text, fntsring, Brushes.Black, 120, 120);
+                e.Graphics.DrawString(rtPayslip.Text, fntsring, Brushes.Black, 120, 120);
             }
             catch (Exception ex)
             {
@@ -287,6 +287,39 @@ namespace final
             {
                 txtotherpayment.Text = "0.0";
             }
+
+        }
+
+        private void btnpayslip_Click(object sender, EventArgs e)
+        {
+            rtPayslip.Clear();
+            rtPayslip.AppendText("\t\t" + "Payslip" + "\t\t" +"\n");
+            rtPayslip.AppendText("\t\t" + "------------" + "\t\t" + "\n");
+            rtPayslip.AppendText("\t\t" + "EmpID" + "\t\t" + txtEmpID.Text +"\n");
+            rtPayslip.AppendText("\t\t" + "Firstname" + "\t\t" + txtFirstname.Text + "\n");
+            rtPayslip.AppendText("\t\t" + "Surname" + "\t\t" + txtSurname.Text + "\n");
+            rtPayslip.AppendText("\t\t" + "Address" + "\t\t" + txtaddress.Text + "\n");
+            rtPayslip.AppendText("\t\t" + "Gender" + "\t\t" + combogender.Text + "\n");
+            rtPayslip.AppendText("\t\t" + "Mobile" + "\t\t" + txtmobile.Text + "\n");
+            rtPayslip.AppendText("\t\t" + "Weight" + "\t\t" + txtcityweighting.Text + "\n");
+            rtPayslip.AppendText("\t\t" + "Salary" + "\t\t" + txtbasicsalary.Text + "\n");
+            rtPayslip.AppendText("\t\t" + "Overtime" + "\t\t" + txtovertime.Text + "\n");
+            rtPayslip.AppendText("\t\t" + "Otherpayment" + "\t\t" + txtotherpayment.Text + "\n");
+            rtPayslip.AppendText("\t\t" + "Tax" + "\t\t" + txttax.Text + "\n");
+            rtPayslip.AppendText("\t\t" + "Pension" + "\t\t" + txtEmpID.Text + "\n");
+            rtPayslip.AppendText("\t\t" + "Studentloan" + "\t\t" + txtEmpID.Text + "\n");
+            rtPayslip.AppendText("\t\t" + "NIPayment" + "\t\t" + txtEmpID.Text + "\n");
+            rtPayslip.AppendText("\t\t" + "Paydate" + "\t\t" + txtEmpID.Text + "\n");
+            rtPayslip.AppendText("\t\t" + "Taxperiod" + "\t\t" + txtEmpID.Text + "\n");
+            rtPayslip.AppendText("\t\t" + "Taxcode" + "\t\t" + txtEmpID.Text + "\n");
+            rtPayslip.AppendText("\t\t" + "NIPeriod" + "\t\t" + txtEmpID.Text + "\n");
+            rtPayslip.AppendText("\t\t" + "NICode" + "\t\t" + txtEmpID.Text + "\n");
+            rtPayslip.AppendText("\t\t" + "Taxablepay" + "\t\t" + txtEmpID.Text + "\n");
+            rtPayslip.AppendText("\t\t" + "Pensionablepay" + "\t\t" + txtEmpID.Text + "\n");
+            rtPayslip.AppendText("\t\t" + "Netpay" + "\t\t" + txtEmpID.Text + "\n");
+            rtPayslip.AppendText("\t\t" + "Grosspay" + "\t\t" + txtEmpID.Text + "\n");
+            rtPayslip.AppendText("\t\t" + "Deduction" + "\t\t" + txtEmpID.Text + "\n");
+           
 
         }
     }
