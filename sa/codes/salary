@@ -322,6 +322,42 @@ namespace final
            
 
         }
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                txtEmpID.Text = dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
+                txtFirstname.Text = dataGridView1.SelectedRows[0].Cells[1].Value.ToString();
+                txtSurname.Text = dataGridView1.SelectedRows[0].Cells[2].Value.ToString();
+                txtaddress.Text = dataGridView1.SelectedRows[0].Cells[3].Value.ToString();
+                combogender.Text = dataGridView1.SelectedRows[0].Cells[4].Value.ToString();
+                txtmobile.Text = dataGridView1.SelectedRows[0].Cells[5].Value.ToString();
+                txtcityweighting.Text = dataGridView1.SelectedRows[0].Cells[6].Value.ToString();
+                txtbasicsalary.Text = dataGridView1.SelectedRows[0].Cells[7].Value.ToString();
+                txtovertime.Text = dataGridView1.SelectedRows[0].Cells[8].Value.ToString();
+                txtotherpayment.Text = dataGridView1.SelectedRows[0].Cells[9].Value.ToString();
+                txttax.Text = dataGridView1.SelectedRows[0].Cells[10].Value.ToString();
+                txtpension.Text = dataGridView1.SelectedRows[0].Cells[11].Value.ToString();
+                txtstudentloan.Text = dataGridView1.SelectedRows[0].Cells[12].Value.ToString();
+                txtNIPayment.Text = dataGridView1.SelectedRows[0].Cells[13].Value.ToString();
+                dateTimePicker1.Text = dataGridView1.SelectedRows[0].Cells[14].Value.ToString();
+                txttaxperiod.Text = dataGridView1.SelectedRows[0].Cells[15].Value.ToString();
+                txttaxcode.Text = dataGridView1.SelectedRows[0].Cells[16].Value.ToString();
+                txtNIPeriod.Text = dataGridView1.SelectedRows[0].Cells[17].Value.ToString();
+                txtNICode.Text = dataGridView1.SelectedRows[0].Cells[18].Value.ToString();
+                txttaxablepay.Text = dataGridView1.SelectedRows[0].Cells[19].Value.ToString();
+                txtpensionablepay.Text = dataGridView1.SelectedRows[0].Cells[20].Value.ToString();
+                txtnetpay.Text = dataGridView1.SelectedRows[0].Cells[21].Value.ToString();
+                txtgrosspay.Text = dataGridView1.SelectedRows[0].Cells[22].Value.ToString();
+                txtdeduction.Text = dataGridView1.SelectedRows[0].Cells[23].Value.ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Employee System", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+        }
     }
 }
 
