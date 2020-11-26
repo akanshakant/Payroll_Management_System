@@ -1,5 +1,3 @@
-
-
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -255,17 +253,27 @@ namespace final
             Period = Double.Parse(txttaxperiod.Text);
             txttaxablepay.Text = String.Format("{0:c2}", Period);
             txtpensionablepay.Text = String.Format("{0:c2}", Period * Pension);
-                // ==============================================================================================================================
+             // ==============================================================================================================================
                     
                 
                      sqlConn.ConnectionString = "server=" + server + ";" + "user id=" + username + ";" + "password=" + password + ";" + "database=" + database;
                      sqlConn.Open();
                      sqlCmd.Connection = sqlConn;
-                     sqlCmd.CommandText = "insert into employeedb(ID,Firstname,Surname,Address,Gender,Mobile"+
+                sqlCmd.CommandText = "insert into employeedb(ID,Firstname,Surname,Address,Gender," +
+               "Mobile,Weight,Salary,Overtime,Otherpay,Tax,Pension,Studentloan,NIPay" +
+               "Paydate,Taxperiod,Taxcode,NINumber,NICode,Taxable,Pensionable,Netpay,Grosspay,Deduction)" +
+               "values('"+ txtEmpID.Text + "','" + txtFirstname.Text + "','" + txtSurname.Text + "','" + txtaddress.Text + "'," +
+               "'" + combogender.Text + "','" + txtmobile.Text + "','" + txtcityweighting.Text + "','" + txtbasicsalary.Text + "'," +
+               "'" + txtovertime.Text + "','" + txtotherpayment.Text + "','" + txttax.Text + "','" + txtpension.Text + "','" + txtstudentloan.Text + "','" +
+               txtNIPayment.Text + "','" + dateTimePicker1.Text + "','" + txttaxperiod.Text + "','" + txttaxcode.Text + "','" + txtNIPeriod.Text + "','" +
+               txtNICode.Text + "','" + txttaxablepay.Text + "','" + txtpensionablepay.Text + "','" + txtnetpay.Text + "','" + txtgrosspay.Text + "','" +
+               txtdeduction.Text +"')";
 
+                sqlCmd.ExecuteNonQuery();
+                sqlConn.Close();
+                refreshdb();
 
-
-               // ==============================================================================================================================
+             // ==============================================================================================================================
             }
             catch (Exception ex)
             {
