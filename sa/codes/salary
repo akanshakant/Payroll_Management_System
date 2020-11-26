@@ -184,7 +184,25 @@ namespace final
 
         private void btndelete_Click(object sender, EventArgs e)
         {
-            refreshdb();
+            try
+            {
+
+                sqlConn.ConnectionString = "server=" + server + ";" + "user id=" + username + ";" + "password=" + password + ";" + "database=" + database;
+                
+                sqlCmd.Connection = sqlConn;
+                String ID = txtEmpID.Text;
+                sqlCmd.CommandText = "delete * from employeedb where ID = "+ ID +"";
+                sqlConn.Open();
+                sqlRd = sqlCmd.ExecuteReader();
+                MessageBox.Show("Record deleted", "Employee System", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                sqlConn.Close();
+                refreshdb();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Employee System", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            
         }
 
         private void txtsearch_KeyPress(object sender, KeyPressEventArgs e)
